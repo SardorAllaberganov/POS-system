@@ -4,6 +4,7 @@ const morgan = require("morgan");
 require("dotenv").config();
 const mongoose = require("mongoose");
 
+//environment variables
 const mongo_db_url = process.env.MONGO_DB_URL;
 const port = process.env.PORT;
 
@@ -22,6 +23,7 @@ app.use((req, res, next) => {
     next();
 });
 
+//middlewares
 app.use(morgan("dev"));
 app.use(express.json());
 
@@ -31,6 +33,7 @@ app.get("/test", (req, res) => {
     });
 });
 
+//db connection
 mongoose
     .connect(mongo_db_url)
     .then(() => {
@@ -43,7 +46,7 @@ mongoose
         console.log(error);
     });
 
-//central error handler
+//global error handler
 app.use((error, req, res, next) => {
     res.status(error.statusCode || 500).json({
         message: error.message,
