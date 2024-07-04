@@ -3,6 +3,7 @@ const app = express();
 const morgan = require("morgan");
 require("dotenv").config();
 const mongoose = require("mongoose");
+const path = require('path');
 
 //environment variables
 const mongo_db_url = process.env.MONGO_DB_URL;
@@ -32,6 +33,8 @@ app.get("/test", (req, res) => {
         message: "Welcome to the API",
     });
 });
+
+app.use("/uploads", express.static(path.join(__dirname), "uploads"))
 
 //db connection
 mongoose
