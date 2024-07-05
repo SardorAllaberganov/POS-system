@@ -3,11 +3,15 @@ const app = express();
 const morgan = require("morgan");
 require("dotenv").config();
 const mongoose = require("mongoose");
-const path = require('path');
+const path = require("path");
 
 //environment variables
 const mongo_db_url = process.env.MONGO_DB_URL;
 const port = process.env.PORT;
+const API = process.env.API;
+
+//routes variables
+const categoryRoutes = require("./router/category");
 
 // Headers and CORS header
 app.use((req, res, next) => {
@@ -34,7 +38,10 @@ app.get("/test", (req, res) => {
     });
 });
 
-app.use("/uploads", express.static(path.join(__dirname), "uploads"))
+//routes
+app.use(`${API}/categories`, categoryRoutes);
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 //db connection
 mongoose
