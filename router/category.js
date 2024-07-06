@@ -7,9 +7,14 @@ const { body } = require("express-validator");
 
 router.get("/", categoryController.getAllCategories);
 router.post(
-    "/create",
-    uploads.single("image"),
-    categoryController.createCategory
+	"/create",
+	uploads.single("image"),
+	categoryController.createCategory
+);
+router.put(
+	"/edit/:id",
+	uploads.single("image"),
+	categoryController.editCategory
 );
 
 module.exports = router;
