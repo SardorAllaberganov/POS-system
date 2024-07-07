@@ -112,3 +112,38 @@ exports.editCategory = (req, res, next) => {
 		return res.status(400).json({ message: "Not valid category ID" });
 	}
 };
+
+exports.deleteCategory = (req, res, next) => {
+	const id = req.params.id;
+	let foundCategory;
+	if (isValidId(id)) {
+		Category.findById(id)
+			.then((category) => {
+				if (!category) {
+					const error = new Error("Category not found");
+					error.statusCode = 422;
+					throw error;
+				}
+				foundCategory = category;
+				return Category.deleteOne({ _id: id })
+					.then(() => {
+						if (!category.image) {
+							const error = new Error("No image found");
+							error.statusCode = 422;
+							throw error;
+						} else {
+							fs.unlinkSync(category.image);
+						}
+					})
+					.catch((error) => next(error));
+			})
+			.then((result) => {
+				return res.status(200).json({
+					message: `Category ${foundCategory.name} is deleted`,
+				});
+			})
+			.catch((error) => next(error));
+	} else {
+		return res.status(400).json({ message: "Not valid category ID" });
+	}
+};
