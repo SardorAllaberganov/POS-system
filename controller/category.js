@@ -76,5 +76,39 @@ exports.createCategory = (req, res, next) => {
 };
 
 exports.editCategory = (req, res, next) => {
-    
+	const categoryId = req.params.id;
+	if (isValidId(categoryId)) {
+		Category.findById(categoryId)
+			.then((category) => {
+				if (!category) {
+					const error = new Error("Category not found");
+					error.statusCode = 422;
+					throw error;
+				}
+				if (req.file) {
+					const image = req.file.path;
+					fs.unlinkSync(category.image);
+					category.image = image;
+				}
+				const name = req.body.name;
+				if (!name || name.length === 0) {
+					const error = new Error("Name field is required");
+					error.statusCode = 422;
+					throw error;
+				}
+				category.name = name;
+				category
+					.save()
+					.then((result) => {
+						return res.status(201).json({
+							message: "Category changed successfully",
+							category: category,
+						});
+					})
+					.catch((error) => next(error));
+			})
+			.catch((error) => next(error));
+	} else {
+		return res.status(400).json({ message: "Not valid category ID" });
+	}
 };
