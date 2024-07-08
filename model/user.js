@@ -20,8 +20,26 @@ const userSchema = mongoose.Schema(
         },
         role: {
             type: String,
-            enum: ["admin", "cashier", "manager", "customer"],
-            default: "customer",
+            enum: ["admin", "cashier", "manager"],
+            default: "cashier",
+        },
+        permissions: {
+            view: {
+                type: Boolean,
+                default: true,
+            },
+            create: {
+                type: Boolean,
+                default: false,
+            },
+            update: {
+                type: Boolean,
+                default: false,
+            },
+            delete: {
+                type: Boolean,
+                default: false,
+            },
         },
         phoneNumber: {
             type: String,
