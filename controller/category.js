@@ -5,6 +5,29 @@ const fs = require("fs");
 
 const isValidId = (id) => mongoose.isValidObjectId(id);
 
+exports.getCategory = (req, res, next) => {
+    const id = req.params.id;
+    if (isValidId(id)) {
+        Category.findById(id)
+            .then((category) => {
+                if (!category) {
+                    const error = new Error("Category not found");
+                    error.statusCode = 422;
+                    throw error;
+                }
+                return res.status(200).json({
+                    message: "Category fetched successfully",
+                    data: category,
+                });
+            })
+            .catch((error) => {
+                next(error);
+            });
+    } else {
+        return res.status(400).json({ message: "Invalid category id" });
+    }
+};
+
 exports.getAllCategories = (req, res, next) => {
     Category.find()
         .then((categories) => {
@@ -113,7 +136,7 @@ exports.editCategory = (req, res, next) => {
             })
             .catch((error) => next(error));
     } else {
-        return res.status(400).json({ message: "Not valid category ID" });
+        return res.status(400).json({ message: "Invalid category id" });
     }
 };
 
@@ -148,6 +171,8 @@ exports.deleteCategory = (req, res, next) => {
             })
             .catch((error) => next(error));
     } else {
-        return res.status(400).json({ message: "Not valid category ID" });
+        return res.status(400).json({ message: "Invalid category id" });
     }
 };
+
+exports.changeStatus = (req, res, next) => {};

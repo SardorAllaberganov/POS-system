@@ -6,6 +6,7 @@ const { isAuth, isAdmin } = require("../helper/is-auth");
 const { body } = require("express-validator");
 
 router.get("/", categoryController.getAllCategories);
+router.get("/:id", categoryController.getCategory);
 router.post(
     "/create",
     uploads.single("image"),
