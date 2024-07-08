@@ -175,4 +175,31 @@ exports.deleteCategory = (req, res, next) => {
     }
 };
 
-exports.changeStatus = (req, res, next) => {};
+exports.changeStatus = (req, res, next) => {
+    const id = req.params.id;
+    if (isValidId(id)) {
+        Category.findById(id)
+            .then((category) => {
+                if (!category) {
+                    const error = new Error("Category not found");
+                    error.statusCode = 422;
+                    throw error;
+                }
+                category.status = !category.status;
+                category
+                    .save()
+                    .then((result) => {
+                        return res.status(201).json({
+                            message: `Category ${category.name} status changed`,
+                            categoryStatus: category.status,
+                        });
+                    })
+                    .catch((error) => next(error));
+            })
+            .catch((error) => {
+                next(error);
+            });
+    } else {
+        return res.status(400).json({ message: "Invalid category id" });
+    }
+};

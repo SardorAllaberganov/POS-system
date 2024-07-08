@@ -21,5 +21,6 @@ router.put(
     categoryController.editCategory
 );
 router.delete("/delete/:id", categoryController.deleteCategory);
+router.patch("/status/:id", categoryController.changeStatus);
 
 module.exports = router;
