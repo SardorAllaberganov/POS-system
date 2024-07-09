@@ -1,0 +1,17 @@
+{
+    "test_api_message": "Добро пожаловать в POS API",
+    "category_name_required": "Укажите название категории",
+    "categories_fetched_successfully": "Категории успешно загружены.",
+    "category_not_found": "Категория не найдена",
+    "category_fetched_successfully": "Категория успешно получена.",
+    "invalid_category_id": "Неверный ID категории",
+    "no_categories_found": "Категории не найдены",
+    "validation_failed": "Валидация не удалась",
+    "no_image_provided": "Не предоставлено изображение",
+    "category_created_successfull": "Категория успешно создана",
+    "category_already_exists": "Категория уже существует",
+    "category_updated_successfully": "Категория успешно обновлена",
+    "no_image_found": "Изображение не найдено",
+    "category_deleted": "Категория удалена",
+    "category_status_changed": "Статус категории изменен"
+}

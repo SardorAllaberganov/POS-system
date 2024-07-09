@@ -1,0 +1,17 @@
+{
+    "test_api_message": "Welcome to the POS API",
+    "category_name_required": "Category name is required",
+    "categories_fetched_successfully": "Categories fetched successfully",
+    "category_not_found": "Category not found",
+    "category_fetched_successfully": "Category fetched successfully",
+    "invalid_category_id": "Invalid category id",
+    "no_categories_found": "No categories found",
+    "validation_failed": "Validation failed",
+    "no_image_provided": "No image provided",
+    "category_created_successfull": "Category created successfully",
+    "category_already_exists": "Category already exists",
+    "category_updated_successfully": "Category updated successfully",
+    "no_image_found": "No image found",
+    "category_deleted": "Category deleted",
+    "category_status_changed": "Category status changed"
+}

@@ -5,14 +5,14 @@ const uploads = require("../helper/file-upload");
 const { isAuth, isAdmin } = require("../helper/is-auth");
 const { body } = require("express-validator");
 
+router.use(express.urlencoded({ extended: true }));
+
 router.get("/", categoryController.getAllCategories);
 router.get("/:id", categoryController.getCategory);
 router.post(
     "/create",
     uploads.single("image"),
-    ...[
-        body("name").trim().notEmpty().withMessage("Category name is required"),
-    ],
+    ...[body("name").trim().notEmpty().withMessage("category_name_required")],
     categoryController.createCategory
 );
 router.put(

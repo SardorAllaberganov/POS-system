@@ -5,6 +5,20 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const path = require("path");
 
+const i18next = require("i18next");
+const Backend = require("i18next-fs-backend");
+const middleware = require("i18next-http-middleware");
+
+i18next
+    .use(Backend)
+    .use(middleware.LanguageDetector)
+    .init({
+        fallbackLng: "en",
+        backend: {
+            loadPath: "./locales/{{lng}}/translation.json",
+        },
+    });
+
 //environment variables
 const mongo_db_url = process.env.MONGO_DB_URL;
 const port = process.env.PORT;
@@ -32,10 +46,11 @@ app.use((req, res, next) => {
 //middlewares
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(middleware.handle(i18next));
 
 app.get("/test", (req, res) => {
     res.json({
-        message: "Welcome to the API",
+        message: req.t("test_api_message"),
     });
 });
 
@@ -61,8 +76,8 @@ mongoose
 //global error handler
 app.use((error, req, res, next) => {
     res.status(error.statusCode || 500).json({
-        message: error.message,
-        data: error.data,
+        message: req.t(error.message),
+        data: req.t(error.data),
         statusCode: error.statusCode,
     });
 });

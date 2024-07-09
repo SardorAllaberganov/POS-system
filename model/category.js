@@ -6,6 +6,11 @@ const categorySchema = mongoose.Schema(
             type: String,
             required: true,
         },
+        translations: {
+            type: Map,
+            of: String,
+            required: true,
+        },
         image: {
             type: String,
         },
@@ -16,7 +21,7 @@ const categorySchema = mongoose.Schema(
     },
     {
         timestamps: true,
-    }
+    },
 );
 
 module.exports = mongoose.model("Category", categorySchema);
