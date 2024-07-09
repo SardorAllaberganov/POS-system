@@ -6,61 +6,57 @@ const User = require("../model/user");
 
 router.get("/", userController.getAllUsers);
 router.post(
-	"/login",
-	[
-		body("email")
-			.not()
-			.isEmpty()
-			.withMessage("Email field is empty")
-			.isEmail()
-			.withMessage("Invalid email address")
-			.custom(async (value, { req }) => {
-				return User.findOne({ email: value }).then((user) => {
-					if (!user) {
-						return Promise.reject("Email address not found");
-					}
-				});
-			})
-			.normalizeEmail(),
-		body("password")
-			.not()
-			.isEmpty()
-			.withMessage("Password field is empty")
-			.isLength({ min: 5 })
-			.withMessage("The password field contains less than 5 characters."),
-	],
-	userController.login
+    "/login",
+    [
+        body("email")
+            .not()
+            .isEmpty()
+            .withMessage("email_address_is_empty")
+            .isEmail()
+            .withMessage("invalid_email_address")
+            .custom(async (value, { req }) => {
+                return User.findOne({ email: value }).then((user) => {
+                    if (!user) {
+                        return Promise.reject("email_address_not_found");
+                    }
+                });
+            })
+            .normalizeEmail(),
+        body("password")
+            .not()
+            .isEmpty()
+            .withMessage("password_field_empty")
+            .isLength({ min: 5 })
+            .withMessage("password_length"),
+    ],
+    userController.login
 );
 
 router.post(
-	"/createUser",
-	[
-		body("name")
-			.not()
-			.isEmpty()
-			.withMessage("The name field must not be empty."),
-		body("email")
-			.not()
-			.isEmpty()
-			.withMessage("The email field must not be empty.")
-			.isEmail()
-			.withMessage("Not valid email address")
-			.custom(async (value, { req }) => {
-				return User.findOne({ email: value }).then((user) => {
-					if (user) {
-						return Promise.reject("Email address already exists");
-					}
-				});
-			})
-			.normalizeEmail(),
-		body("password")
-			.not()
-			.isEmpty()
-			.isLength({ min: 5 })
-			.withMessage("The password field contains less than 5 characters."),
-            
-	],
-	userController.createUser
+    "/createUser",
+    [
+        body("name").not().isEmpty().withMessage("name_is_empty"),
+        body("email")
+            .not()
+            .isEmpty()
+            .withMessage("email_address_is_empty")
+            .isEmail()
+            .withMessage("invalid_email_address")
+            .custom(async (value, { req }) => {
+                return User.findOne({ email: value }).then((user) => {
+                    if (user) {
+                        return Promise.reject("email_already_exists");
+                    }
+                });
+            })
+            .normalizeEmail(),
+        body("password")
+            .not()
+            .isEmpty()
+            .isLength({ min: 5 })
+            .withMessage("password_length"),
+    ],
+    userController.createUser
 );
 
 module.exports = router;

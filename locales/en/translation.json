@@ -13,5 +13,17 @@
     "category_updated_successfully": "Category updated successfully",
     "no_image_found": "No image found",
     "category_deleted": "Category deleted",
-    "category_status_changed": "Category status changed"
+    "category_status_changed": "Category status changed",
+    "email_address_is_empty": "Email field is empty",
+    "invalid_email_address": "Invalid email address",
+    "email_address_not_found": "The email field must not be empty.",
+    "password_field_empty": "Password field is empty",
+    "password_length": "The password field contains less than 5 characters.",
+    "name_is_empty": "The name field must not be empty.",
+    "email_already_exists": "Email already exists.",
+    "no_user_found": "User not found",
+    "user_fetched_successfully": "Users fetched successfully",
+    "wrong_password": "Wrong password",
+    "login_successful": "Login successful",
+    "user_created_successfully": "User created successfully"
 }

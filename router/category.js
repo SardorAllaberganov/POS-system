@@ -5,7 +5,7 @@ const uploads = require("../helper/file-upload");
 const { isAuth, isAdmin } = require("../helper/is-auth");
 const { body } = require("express-validator");
 
-router.use(express.urlencoded({ extended: true }));
+
 
 router.get("/", categoryController.getAllCategories);
 router.get("/:id", categoryController.getCategory);

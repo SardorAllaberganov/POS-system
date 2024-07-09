@@ -46,6 +46,7 @@ app.use((req, res, next) => {
 //middlewares
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(middleware.handle(i18next));
 
 app.get("/test", (req, res) => {
@@ -75,9 +76,20 @@ mongoose
 
 //global error handler
 app.use((error, req, res, next) => {
+    error.data = error.data.map((item) => {
+        const { type, value, msg, path, location } = item;
+        const translatedMessage = req.t(msg);
+        return {
+            type,
+            value,
+            translatedMessage,
+            path,
+            location,
+        };
+    });
     res.status(error.statusCode || 500).json({
         message: req.t(error.message),
-        data: req.t(error.data),
+        data: error.data,
         statusCode: error.statusCode,
     });
 });

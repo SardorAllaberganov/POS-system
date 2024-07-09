@@ -13,5 +13,17 @@
     "category_updated_successfully": "Категория успешно обновлена",
     "no_image_found": "Изображение не найдено",
     "category_deleted": "Категория удалена",
-    "category_status_changed": "Статус категории изменен"
+    "category_status_changed": "Статус категории изменен",
+    "email_address_is_empty": "Поле электронной почты пусто",
+    "invalid_email_address": "Неверный адрес электронной почты",
+    "email_address_not_found": "Поле электронной почты не должно быть пустым.",
+    "password_field_empty": "Поле пароля пусто",
+    "password_length": "Поле пароля содержит менее 5 символов.",
+    "name_is_empty": "Поле имени не должно быть пустым.",
+    "email_already_exists": "Адрес электронной почты уже существует.",
+    "no_user_found": "Пользователь не найден",
+    "user_fetched_successfully": "Пользователи успешно загружены",
+    "wrong_password": "Неправильный пароль",
+    "login_successful": "Авторизация успешна",
+    "user_created_successfully": "Пользователь успешно создан"
 }

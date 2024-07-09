@@ -9,12 +9,12 @@ exports.getAllUsers = (req, res, next) => {
     User.find()
         .then((users) => {
             if (!users) {
-                const error = new Error("No users found");
+                const error = new Error(req.t("no_user_found"));
                 error.statusCode = 404;
                 throw error;
             }
             return res.status(200).json({
-                message: "Users fetched successfully",
+                message: req.t("user_fetched_successfully"),
                 data: users,
             });
         })
@@ -27,7 +27,7 @@ exports.login = (req, res, next) => {
     const { email, password } = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        const error = new Error("Validation failed");
+        const error = new Error(req.t("validation_failed"));
         error.data = errors.array();
         error.statusCode = 422;
         throw error;
@@ -35,7 +35,7 @@ exports.login = (req, res, next) => {
     User.findOne({ email: email })
         .then((user) => {
             if (!user) {
-                const error = new Error("User not found");
+                const error = new Error(req.t("no_user_found"));
                 error.statusCode = 404;
                 throw error;
             }
@@ -43,7 +43,7 @@ exports.login = (req, res, next) => {
                 .compare(password, user.password)
                 .then((isEqual) => {
                     if (!isEqual) {
-                        const error = new Error("Wrong password");
+                        const error = new Error(req.t("wrong_password"));
                         error.statusCode = 401;
                         throw error;
                     }
@@ -60,7 +60,7 @@ exports.login = (req, res, next) => {
                         }
                     );
                     return res.status(200).json({
-                        message: "Login successful",
+                        message: req.t("login_successful"),
                         data: {
                             id: user._id,
                             name: user.name,
@@ -79,7 +79,7 @@ exports.createUser = (req, res, next) => {
     const { name, email, password, role, permissions, phoneNumber } = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        const error = new Error("Validation failed");
+        const error = new Error(req.t("validation_failed"));
         error.data = errors.array();
         error.statusCode = 422;
         throw error;
@@ -107,7 +107,7 @@ exports.createUser = (req, res, next) => {
                     const userWithoutPassword = result.toObject();
                     delete userWithoutPassword.password;
                     return res.status(201).json({
-                        message: "User created successfully",
+                        message: req.t("user_created_successfully"),
                         data: userWithoutPassword,
                     });
                 })
