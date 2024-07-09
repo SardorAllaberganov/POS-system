@@ -25,5 +25,6 @@
     "user_fetched_successfully": "Users fetched successfully",
     "wrong_password": "Wrong password",
     "login_successful": "Login successful",
-    "user_created_successfully": "User created successfully"
+    "user_created_successfully": "User created successfully",
+    "access_denied": "Access denied"
 }

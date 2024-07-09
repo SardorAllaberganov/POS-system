@@ -13,6 +13,11 @@ exports.getAllUsers = (req, res, next) => {
                 error.statusCode = 404;
                 throw error;
             }
+            users = users.map((user) => {
+                const userWithoutPassword = user.toObject();
+                delete userWithoutPassword.password;
+                return userWithoutPassword;
+            });
             return res.status(200).json({
                 message: req.t("user_fetched_successfully"),
                 data: users,

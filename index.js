@@ -76,17 +76,19 @@ mongoose
 
 //global error handler
 app.use((error, req, res, next) => {
-    error.data = error.data.map((item) => {
-        const { type, value, msg, path, location } = item;
-        const translatedMessage = req.t(msg);
-        return {
-            type,
-            value,
-            translatedMessage,
-            path,
-            location,
-        };
-    });
+    if (error.data) {
+        error.data = error.data.map((item) => {
+            const { type, value, msg, path, location } = item;
+            const translatedMessage = req.t(msg);
+            return {
+                type,
+                value,
+                translatedMessage,
+                path,
+                location,
+            };
+        });
+    }
     res.status(error.statusCode || 500).json({
         message: req.t(error.message),
         data: error.data,

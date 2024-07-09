@@ -7,22 +7,22 @@ const isAuth = jwt({
 });
 
 const isAdmin = (req, res, next) => {
-    if (req.user.role !== "admin") {
-        return res.status(403).json({ message: "Access denied" });
+    if (req.auth.role !== "admin") {
+        return res.status(403).json({ message: req.t("access_denied") });
     }
     next();
 };
 
 const isCashier = (req, res, next) => {
-    if (req.user.role !== "cashier") {
-        return res.status(403).json({ message: "Access denied" });
+    if (req.auth.role !== "cashier") {
+        return res.status(403).json({ message: req.t("access_denied") });
     }
     next();
 };
 
 const isManager = (req, res, next) => {
-    if (req.user.role !== "manager") {
-        return res.status(403).json({ message: "Access denied" });
+    if (req.auth.role !== "manager") {
+        return res.status(403).json({ message: req.t("access_denied") });
     }
     next();
 };

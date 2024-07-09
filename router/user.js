@@ -3,6 +3,7 @@ const router = express.Router();
 const userController = require("../controller/user");
 const { body } = require("express-validator");
 const User = require("../model/user");
+const { isAuth, isAdmin, isManager } = require("../helper/is-auth");
 
 router.get("/", userController.getAllUsers);
 router.post(
@@ -34,6 +35,8 @@ router.post(
 
 router.post(
     "/createUser",
+    isAuth,
+    isAdmin || isManager,
     [
         body("name").not().isEmpty().withMessage("name_is_empty"),
         body("email")

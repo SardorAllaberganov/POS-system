@@ -25,5 +25,6 @@
     "user_fetched_successfully": "Пользователи успешно загружены",
     "wrong_password": "Неправильный пароль",
     "login_successful": "Авторизация успешна",
-    "user_created_successfully": "Пользователь успешно создан"
+    "user_created_successfully": "Пользователь успешно создан",
+    "access_denied": "Доступ запрещен"
 }
