@@ -26,5 +26,8 @@
     "wrong_password": "Wrong password",
     "login_successful": "Login successful",
     "user_created_successfully": "User created successfully",
-    "access_denied": "Access denied"
+    "access_denied": "Access denied",
+    "invalid_user_id": "Invalid User ID",
+    "not_equal_password": "The password confirmation does not match",
+    "password_changed_successfully": "The password changed successfully"
 }

@@ -4,121 +4,175 @@ const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
 const mongoose = require("mongoose");
 const isValidId = (id) => mongoose.isValidObjectId(id);
+const errorMessage = require("../helper/errorMessage");
 
 exports.getAllUsers = (req, res, next) => {
-    User.find()
-        .then((users) => {
-            if (!users) {
-                const error = new Error(req.t("no_user_found"));
-                error.statusCode = 404;
-                throw error;
-            }
-            users = users.map((user) => {
-                const userWithoutPassword = user.toObject();
-                delete userWithoutPassword.password;
-                return userWithoutPassword;
-            });
-            return res.status(200).json({
-                message: req.t("user_fetched_successfully"),
-                data: users,
-            });
-        })
-        .catch((error) => {
-            next(error);
-        });
+	User.find()
+		.then((users) => {
+			if (!users) {
+				errorMessage(req.t("no_user_found"), 404);
+			}
+			users = users.map((user) => {
+				const userWithoutPassword = user.toObject();
+				delete userWithoutPassword.password;
+				return userWithoutPassword;
+			});
+			return res.status(200).json({
+				message: req.t("user_fetched_successfully"),
+				data: users,
+			});
+		})
+		.catch((error) => {
+			next(error);
+		});
 };
 
 exports.login = (req, res, next) => {
-    const { email, password } = req.body;
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        const error = new Error(req.t("validation_failed"));
-        error.data = errors.array();
-        error.statusCode = 422;
-        throw error;
-    }
-    User.findOne({ email: email })
-        .then((user) => {
-            if (!user) {
-                const error = new Error(req.t("no_user_found"));
-                error.statusCode = 404;
-                throw error;
-            }
-            bcrypt
-                .compare(password, user.password)
-                .then((isEqual) => {
-                    if (!isEqual) {
-                        const error = new Error(req.t("wrong_password"));
-                        error.statusCode = 401;
-                        throw error;
-                    }
-                    const token = jwt.sign(
-                        {
-                            id: user._id.toString(),
-                            email: user.email,
-                            name: user.name,
-                            role: user.role,
-                        },
-                        process.env.JWT_SECRET,
-                        {
-                            expiresIn: "1d",
-                        }
-                    );
-                    return res.status(200).json({
-                        message: req.t("login_successful"),
-                        data: {
-                            id: user._id,
-                            name: user.name,
-                            email: user.email,
-                            role: user.role,
-                        },
-                        token: token,
-                    });
-                })
-                .catch((error) => next(error));
-        })
-        .catch((error) => next(error));
+	const { email, password } = req.body;
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		errorMessage(req.t("validation_failed"), 422, errors);
+	}
+	User.findOne({ email: email })
+		.then((user) => {
+			if (!user) {
+				errorMessage(req.t("no_user_found"), 404);
+			}
+			bcrypt
+				.compare(password, user.password)
+				.then((isEqual) => {
+					if (!isEqual) {
+						errorMessage(req.t("wrong_password"), 401);
+					}
+					const token = jwt.sign(
+						{
+							id: user._id.toString(),
+							email: user.email,
+							name: user.name,
+							role: user.role,
+						},
+						process.env.JWT_SECRET,
+						{
+							expiresIn: "1d",
+						}
+					);
+					return res.status(200).json({
+						message: req.t("login_successful"),
+						data: {
+							id: user._id,
+							name: user.name,
+							email: user.email,
+							role: user.role,
+						},
+						token: token,
+					});
+				})
+				.catch((error) => next(error));
+		})
+		.catch((error) => next(error));
 };
 
 exports.createUser = (req, res, next) => {
-    const { name, email, password, role, permissions, phoneNumber } = req.body;
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        const error = new Error(req.t("validation_failed"));
-        error.data = errors.array();
-        error.statusCode = 422;
-        throw error;
-    }
-    const { canView, canUpdate, canDelete, canCreate } = permissions;
-    bcrypt
-        .hash(password, 12)
-        .then((hashedPassword) => {
-            const user = new User({
-                name: name,
-                email: email,
-                password: hashedPassword,
-                role: role,
-                permissions: {
-                    view: canView,
-                    update: canUpdate,
-                    delete: canDelete,
-                    create: canCreate,
-                },
-                phoneNumber: phoneNumber,
-            });
-            return user
-                .save()
-                .then((result) => {
-                    const userWithoutPassword = result.toObject();
-                    delete userWithoutPassword.password;
-                    return res.status(201).json({
-                        message: req.t("user_created_successfully"),
-                        data: userWithoutPassword,
-                    });
-                })
-                .catch((error) => {
-                    next(error);
-                });
-        })
-        .catch((error) => next(error));
+	const { name, email, password, role, permissions, phoneNumber } = req.body;
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		errorMessage(req.t("validation_failed"), 422, errors);
+	}
+	const { canView, canUpdate, canDelete, canCreate } = permissions;
+	bcrypt
+		.hash(password, 12)
+		.then((hashedPassword) => {
+			const user = new User({
+				name: name,
+				email: email,
+				password: hashedPassword,
+				role: role,
+				permissions: {
+					view: canView,
+					update: canUpdate,
+					delete: canDelete,
+					create: canCreate,
+				},
+				phoneNumber: phoneNumber,
+			});
+			return user
+				.save()
+				.then((result) => {
+					const userWithoutPassword = result.toObject();
+					delete userWithoutPassword.password;
+					return res.status(201).json({
+						message: req.t("user_created_successfully"),
+						data: userWithoutPassword,
+					});
+				})
+				.catch((error) => {
+					next(error);
+				});
+		})
+		.catch((error) => next(error));
+};
+
+exports.editUser = (req, res, next) => {
+	const id = req.params.id;
+	if (isValidId(id)) {
+		User.findById(id)
+			.then((user) => {
+				if (!user) {
+					errorMessage(req.t("no_user_found"), 404);
+				}
+			})
+			.catch((error) => next(error));
+	} else {
+		return res.status(400).json({ message: req.t("invalid_user_id") });
+	}
+};
+
+exports.changePassword = (req, res, next) => {
+	const id = req.params.id;
+	const { password, newPassword, confirmNewPassword } = req.body;
+
+	if (isValidId(id)) {
+		User.findById(id)
+			.then((user) => {
+				if (!user) {
+					errorMessage(req.t("no_user_found", 404));
+				}
+				console.log(password, newPassword, confirmNewPassword);
+				bcrypt
+					.compare(password, user.password)
+					.then((isEqual) => {
+						if (!isEqual) {
+							errorMessage(req.t("wrong_password"), 401);
+						}
+						if (newPassword === confirmNewPassword) {
+							bcrypt
+								.hash(newPassword, 12)
+								.then((hashedNewPassword) => {
+									user.password = hashedNewPassword;
+									return user
+										.save()
+										.then((result) => {
+											return res.status(201).json({
+												message: req.t(
+													"password_changed_successfully"
+												),
+											});
+										})
+										.catch((error) => {
+											next(error);
+										});
+								})
+								.catch((error) => next(error));
+						} else {
+							errorMessage(req.t("not_equal_password"), 401);
+						}
+					})
+					.catch((error) => next(error));
+			})
+			.catch((error) => {
+				next(error);
+			});
+	} else {
+		return res.status(400).json({ message: req.t("invalid_user_id") });
+	}
 };

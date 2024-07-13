@@ -26,5 +26,8 @@
     "wrong_password": "Неправильный пароль",
     "login_successful": "Авторизация успешна",
     "user_created_successfully": "Пользователь успешно создан",
-    "access_denied": "Доступ запрещен"
+    "access_denied": "Доступ запрещен",
+    "invalid_user_id": "Неверный ID пользователя",
+    "not_equal_password": "Пароль не совпадает с паролем подтверждения",
+    "password_changed_successfully": "Пароль успешно изменен"
 }
