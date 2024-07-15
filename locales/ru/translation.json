@@ -31,5 +31,6 @@
     "not_equal_password": "Пароль не совпадает с паролем подтверждения",
     "password_changed_successfully": "Пароль успешно изменен",
     "permission_changed_successfully": "Права доступа изменены успешно.",
-    "user_deleted_successfully": "Пользователь удален успешно"
+    "user_deleted_successfully": "Пользователь удален успешно",
+    "role_changed_successfully": "Роль успешно изменена"
 }

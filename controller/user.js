@@ -192,19 +192,20 @@ exports.changePassword = (req, res, next) => {
 };
 
 exports.changePermission = (req, res, next) => {
-    const { id, canView, canUpdate, canDelete, canCreate } = req.body;
+    const id = req.body.id;
+    const { canView, canUpdate, canDelete, canCreate } = req.body.permissions;
     if (isValidId(id)) {
         User.findById(id)
             .then((user) => {
                 if (!user) {
                     errorMessage(req.t("no_user_found"), 404);
                 }
-                user = {
-                    canView: canView,
-                    canUpdate: canUpdate,
-                    canDelete: canDelete,
-                    canCreate: canCreate,
-                };
+
+                user.permissions.view = canView;
+                user.permissions.update = canUpdate;
+                user.permissions.delete = canDelete;
+                user.permissions.create = canCreate;
+
                 user.save()
                     .then((result) => {
                         return res.status(201).json({
