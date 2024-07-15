@@ -29,5 +29,7 @@
     "access_denied": "Access denied",
     "invalid_user_id": "Invalid User ID",
     "not_equal_password": "The password confirmation does not match",
-    "password_changed_successfully": "The password changed successfully"
+    "password_changed_successfully": "The password changed successfully",
+    "permission_changed_successfully": "The permissions changed successfully",
+    "user_deleted_successfully": "The user deleted successfully"
 }
