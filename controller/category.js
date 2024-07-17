@@ -1,10 +1,8 @@
 const Category = require("../model/category");
-const mongoose = require("mongoose");
 const { validationResult } = require("express-validator");
 const fs = require("fs");
 const errorMessage = require("../helper/errorMessage");
-
-const isValidId = (id) => mongoose.isValidObjectId(id);
+const isValidId = require("../helper/is-valid-id");
 
 exports.getCategory = (req, res, next) => {
 	const id = req.params.id;
