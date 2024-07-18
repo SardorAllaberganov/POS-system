@@ -40,5 +40,6 @@
     "lastname_is_empty": "Поле фамилия не должно быть пустым.",
     "phone_is_empty": "Поле телефона не должно быть пустым.",
     "customer_created_successfully": "Клиент создан успешно.",
-    "phone_already_exists": "Телефон уже существует"
+    "phone_already_exists": "Телефон уже существует",
+    "customer_deleted_successfully": "Клиент успешно удален"
 }

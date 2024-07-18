@@ -66,9 +66,23 @@ exports.createCustomer = (req, res, next) => {
 };
 exports.editCustomer = (req, res, next) => {
     const id = req.params.id;
-    
 };
-exports.deleteCustomer = (req, res, next) => {};
+exports.deleteCustomer = (req, res, next) => {
+    const id = req.params.id;
+    if (isValidId(id)) {
+        Customer.findByIdAndDelete(id).then((result) => {
+            if (!result) {
+                errorMessage(req.t("customer_not_found"), 404);
+            }
+            return res.status(200).json({
+                message: req.t("customer_deleted_successfully"),
+                data: result,
+            });
+        });
+    } else {
+        return res.status(400).json({ message: req.t("invalid_user_id") });
+    }
+};
 exports.searchCustomer = (req, res, next) => {};
 exports.addLoyaltyPoints = (req, res, next) => {};
 exports.deductLoyaltyPoints = (req, res, next) => {};

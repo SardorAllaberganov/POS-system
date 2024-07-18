@@ -38,4 +38,9 @@ router.post(
     customerController.createCustomer
 );
 
+router.delete(
+    "/delete/:id",
+    /*isAuth, isAdmin,*/ customerController.deleteCustomer
+);
+
 module.exports = router;

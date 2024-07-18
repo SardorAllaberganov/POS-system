@@ -40,5 +40,6 @@
     "lastname_is_empty": "The lastname field must not be empty.",
     "phone_is_empty": "The phone field must not be empty.",
     "customer_created_successfully": "Customer created successfully",
-    "phone_already_exists": "The phone already exists"
+    "phone_already_exists": "The phone already exists",
+    "customer_deleted_successfully": "Customer deleted successfully"
 }
