@@ -27,6 +27,7 @@ const API = process.env.API;
 //routes variables
 const categoryRoutes = require("./router/category");
 const userRoutes = require("./router/user");
+const customerRoutes = require("./router/customer");
 
 // Headers and CORS header
 app.use((req, res, next) => {
@@ -58,6 +59,7 @@ app.get("/test", (req, res) => {
 //routes
 app.use(`${API}/categories`, categoryRoutes);
 app.use(`${API}/users`, userRoutes);
+app.use(`${API}/customers`, customerRoutes);
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 

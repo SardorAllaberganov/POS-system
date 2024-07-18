@@ -10,11 +10,11 @@ const addressSchema = mongoose.Schema({
 
 const customerSchema = mongoose.Schema(
     {
-        firstName: {
+        firstname: {
             type: String,
             required: true,
         },
-        lastName: {
+        lastname: {
             type: String,
             required: true,
         },

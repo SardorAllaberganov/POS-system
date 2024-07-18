@@ -32,5 +32,13 @@
     "password_changed_successfully": "Пароль успешно изменен",
     "permission_changed_successfully": "Права доступа изменены успешно.",
     "user_deleted_successfully": "Пользователь удален успешно",
-    "role_changed_successfully": "Роль успешно изменена"
+    "role_changed_successfully": "Роль успешно изменена",
+    "no_customer_found": "Клиенты не найдены",
+    "customer_fetched_successfully": "Клиенты успешно получены",
+    "customer_not_found": "Клиент не найден",
+    "firstname_is_empty": "Поле имени не должно быть пустым.",
+    "lastname_is_empty": "Поле фамилия не должно быть пустым.",
+    "phone_is_empty": "Поле телефона не должно быть пустым.",
+    "customer_created_successfully": "Клиент создан успешно.",
+    "phone_already_exists": "Телефон уже существует"
 }
