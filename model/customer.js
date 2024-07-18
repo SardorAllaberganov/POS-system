@@ -1,13 +1,5 @@
 const mongoose = require("mongoose");
 
-const addressSchema = mongoose.Schema({
-    street: String,
-    city: String,
-    state: String,
-    country: String,
-    postalCode: String,
-});
-
 const customerSchema = mongoose.Schema(
     {
         firstname: {
@@ -19,12 +11,18 @@ const customerSchema = mongoose.Schema(
             required: true,
         },
         email: String,
-        dob: Date,
+        dob: { type: Date, trim: true },
         phone: {
             type: String,
             required: true,
         },
-        addresses: [addressSchema],
+        address: {
+            street: String,
+            city: String,
+            state: String,
+            country: String,
+            postalCode: String,
+        },
         loyaltyPoints: {
             type: Number,
             default: 0,

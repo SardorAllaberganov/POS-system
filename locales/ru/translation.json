@@ -41,5 +41,6 @@
     "phone_is_empty": "Поле телефона не должно быть пустым.",
     "customer_created_successfully": "Клиент создан успешно.",
     "phone_already_exists": "Телефон уже существует",
-    "customer_deleted_successfully": "Клиент успешно удален"
+    "customer_deleted_successfully": "Клиент успешно удален",
+    "customer_updated_successfully": "Клиент успешно обновлен"
 }

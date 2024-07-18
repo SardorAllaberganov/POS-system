@@ -6,6 +6,7 @@ const { isAuth, isAdmin, isManager } = require("../helper/is-auth");
 const { body } = require("express-validator");
 
 router.get("/", /*isAuth,*/ customerController.getAllCustomers);
+router.get("/search", customerController.searchCustomer);
 router.get("/:id", /*isAuth,*/ customerController.getCustomer);
 router.post(
     "/create",
@@ -36,6 +37,20 @@ router.post(
             .normalizeEmail(),
     ],
     customerController.createCustomer
+);
+
+router.post(
+    "/edit/:id",
+    /*isAuth,*/ [
+        body("firstname").not().isEmpty().withMessage("firstname_is_empty"),
+        body("lastname").not().isEmpty().withMessage("lastname_is_empty"),
+        body("phone").not().isEmpty().withMessage("phone_is_empty"),
+        body("email")
+            .isEmail()
+            .withMessage("invalid_email_address")
+            .normalizeEmail(),
+    ],
+    customerController.editCustomer
 );
 
 router.delete(
