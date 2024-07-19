@@ -42,5 +42,7 @@
     "customer_created_successfully": "Customer created successfully",
     "phone_already_exists": "The phone already exists",
     "customer_deleted_successfully": "Customer deleted successfully",
-    "customer_updated_successfully": "Customer updated successfully"
+    "customer_updated_successfully": "Customer updated successfully",
+    "orders_not_found": "The order does not exist yet",
+    "orders_fetched_successfully": "The orders has been fetched successfully"
 }

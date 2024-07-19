@@ -42,5 +42,7 @@
     "customer_created_successfully": "Клиент создан успешно.",
     "phone_already_exists": "Телефон уже существует",
     "customer_deleted_successfully": "Клиент успешно удален",
-    "customer_updated_successfully": "Клиент успешно обновлен"
+    "customer_updated_successfully": "Клиент успешно обновлен",
+    "orders_not_found": "Заказов пока нет",
+    "orders_fetched_successfully": "Заказы успешно получены"
 }
