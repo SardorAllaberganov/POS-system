@@ -147,7 +147,9 @@ exports.searchCustomer = (req, res, next) => {
 		});
 };
 exports.addLoyaltyPoints = (req, res, next) => {};
+
 exports.deductLoyaltyPoints = (req, res, next) => {};
+
 exports.customerOrderHistory = (req, res, next) => {
 	const customerId = req.params.id;
 	if (isValidId(customerId)) {
