@@ -44,5 +44,7 @@
     "customer_deleted_successfully": "Customer deleted successfully",
     "customer_updated_successfully": "Customer updated successfully",
     "orders_not_found": "The order does not exist yet",
-    "orders_fetched_successfully": "The orders has been fetched successfully"
+    "orders_fetched_successfully": "The orders has been fetched successfully",
+    "order_created_successfully": "Order created successfully",
+    "product_not_found": "Product not found"
 }

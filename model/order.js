@@ -7,11 +7,6 @@ const orderSchema = mongoose.Schema(
 			ref: "Customer",
 			required: true,
 		},
-		userId: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: "User",
-			required: true,
-		},
 		items: [
 			{
 				product: {
@@ -23,11 +18,6 @@ const orderSchema = mongoose.Schema(
 			},
 		],
 		totalAmount: { type: Number, required: true },
-		paymentMethod: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: "Payment",
-			required: true,
-		},
 		status: {
 			type: String,
 			enum: ["Pending", "Completed", "Cancelled"],

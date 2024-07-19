@@ -44,5 +44,7 @@
     "customer_deleted_successfully": "Клиент успешно удален",
     "customer_updated_successfully": "Клиент успешно обновлен",
     "orders_not_found": "Заказов пока нет",
-    "orders_fetched_successfully": "Заказы успешно получены"
+    "orders_fetched_successfully": "Заказы успешно получены",
+    "order_created_successfully": "Заказ создан успешно.",
+    "product_not_found": "Продукт не найден"
 }
