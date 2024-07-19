@@ -23,6 +23,11 @@ const orderSchema = mongoose.Schema(
 			},
 		],
 		totalAmount: { type: Number, required: true },
+		paymentMethod: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Payment",
+			required: true,
+		},
 		status: {
 			type: String,
 			enum: ["Pending", "Completed", "Cancelled"],
