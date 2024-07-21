@@ -29,6 +29,7 @@ const categoryRoutes = require("./router/category");
 const userRoutes = require("./router/user");
 const customerRoutes = require("./router/customer");
 const orderRoutes = require("./router/order");
+const productRoutes = require("./router/product");
 
 // Headers and CORS header
 app.use((req, res, next) => {
@@ -62,6 +63,7 @@ app.use(`${API}/categories`, categoryRoutes);
 app.use(`${API}/users`, userRoutes);
 app.use(`${API}/customers`, customerRoutes);
 app.use(`${API}/orders`, orderRoutes);
+app.use(`${API}/products`, productRoutes);
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 

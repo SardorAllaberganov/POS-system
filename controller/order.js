@@ -21,13 +21,17 @@ exports.getAllOrders = (req, res, next) => {
 
 exports.createOrder = async (req, res, next) => {
 	const { customerId, items } = req.body;
+
 	const customer = await Customer.findById(customerId);
 	if (!customer) errorMessage(req.t("customer_not_found"), 404);
 	let totalAmount = 0;
 	for (let item of items) {
-		const product = await Product.findById(item.productId);
-		if (!product) errorMessage(req.t(""), 404);
-		totalAmount += product.price * item.quantity;
+		Product.findById(item.productId)
+			.then((product) => {
+				if (!product) errorMessage(req.t("product_not_found"), 404);
+				totalAmount += product.price * item.quantity;
+			})
+			.catch((error) => next(error));
 	}
 	const order = new Order({
 		customerId,

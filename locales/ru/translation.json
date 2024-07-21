@@ -46,5 +46,10 @@
     "orders_not_found": "Заказов пока нет",
     "orders_fetched_successfully": "Заказы успешно получены",
     "order_created_successfully": "Заказ создан успешно.",
-    "product_not_found": "Продукт не найден"
+    "product_not_found": "Продукт не найден",
+    "products_not_found": "Продукты не найден",
+    "product_in_cart": "Товар уже в корзине",
+    "product_fetched_successfully": "Продукт успешно загружен",
+    "products_fetched_successfully": "Продукты успешно загружены",
+    "invalid_product_id": "Неверный ID продукта"
 }

@@ -46,5 +46,10 @@
     "orders_not_found": "The order does not exist yet",
     "orders_fetched_successfully": "The orders has been fetched successfully",
     "order_created_successfully": "Order created successfully",
-    "product_not_found": "Product not found"
+    "product_not_found": "Product not found",
+    "products_not_found": "Products not found",
+    "product_in_cart": "Product already in cart",
+    "product_fetched_successfully": "Product fetched successfully",
+    "products_fetched_successfully": "Products fetched successfully",
+    "invalid_product_id": "Invalid product ID"
 }
