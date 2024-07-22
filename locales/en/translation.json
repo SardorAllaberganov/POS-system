@@ -51,5 +51,7 @@
     "product_in_cart": "Product already in cart",
     "product_fetched_successfully": "Product fetched successfully",
     "products_fetched_successfully": "Products fetched successfully",
-    "invalid_product_id": "Invalid product ID"
+    "invalid_product_id": "Invalid product ID",
+    "no_suppliers_found": "Suppliers not found",
+    "suppliers_fetched_successfully": "Suppliers fetched successfully"
 }

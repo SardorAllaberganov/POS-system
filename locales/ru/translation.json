@@ -51,5 +51,7 @@
     "product_in_cart": "Товар уже в корзине",
     "product_fetched_successfully": "Продукт успешно загружен",
     "products_fetched_successfully": "Продукты успешно загружены",
-    "invalid_product_id": "Неверный ID продукта"
+    "invalid_product_id": "Неверный ID продукта",
+    "no_supplier_found": "Поставщики не найден",
+    "suppliers_fetched_successfully": "Поставщики успешно загружены"
 }
